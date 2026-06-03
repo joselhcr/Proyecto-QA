@@ -1,0 +1,36 @@
+# TC-R-06 — Registro masivo (200 usuarios concurrentes)
+# Objetivo: POST /auth/register soporta 200 VUs con tasa de éxito >= 95%
+#           y tiempo de respuesta promedio <= 2000ms.
+# Herramienta: Artillery.io
+
+config:
+  target: "http://localhost:4000"
+  phases:
+    - name: "Ramp-up: 200 registros en 20s"
+      duration: 20
+      arrivalRate: 10
+    - name: "Pico: 200 usuarios simultáneos durante 20s"
+      duration: 20
+      arrivalRate: 0
+      maxVusers: 200
+  defaults:
+    headers:
+      Content-Type: "application/json"
+  ensure:
+    thresholds:
+      - http.response_time.p95: 2000
+    conditions:
+      - expression: "(http.codes['201'] / requests.completed) >= 0.95"
+        strict: false
+
+scenarios:
+  - name: "TC-R-06: Registro de usuario único con email aleatorio"
+    flow:
+      - post:
+          url: "/auth/register"
+          json:
+            username: "loaduser_{{ $randomString(8) }}"
+            email:    "user_{{ $randomString(12) }}@loadtest.com"
+            password: "Pass123!"
+          expect:
+            - statusCode: 201

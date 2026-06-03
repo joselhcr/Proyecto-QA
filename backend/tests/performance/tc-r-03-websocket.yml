@@ -1,0 +1,37 @@
+# TC-R-03 — Concurrencia WebSocket: 50 partidas simultáneas (prueba MANUAL con Artillery)
+# Referenciado desde: backend/tests/manual/TC-R-03-ws-concurrencia.md
+# Herramienta: Artillery.io
+# Comando: npx artillery run tests/performance/tc-r-03-websocket.yml --output reporte-tc-r-03.json
+
+config:
+  target: "ws://localhost:4000"
+  phases:
+    - duration: 20
+      arrivalRate: 5
+      name: "Ramp-up: 100 clientes en 20s"
+    - duration: 30
+      arrivalRate: 0
+      name: "Carga sostenida: 50 salas activas"
+  ws:
+    path: "/ws"
+
+scenarios:
+  - name: "TC-R-03: Jugador en partida multijugador"
+    engine: "ws"
+    flow:
+      # Conectar al servidor — responde con {type:"connected", clientId}
+      - send: '{"type":"join","username":"loaduser-{{ $randomInt(1,9999) }}"}'
+      - think: 1
+
+      # Esperar emparejamiento y simular jugadas con delay realista
+      - think: 2
+      - send: '{"type":"move","index":0}'
+      - think: 1
+      - send: '{"type":"move","index":4}'
+      - think: 1
+      - send: '{"type":"move","index":8}'
+      - think: 2
+
+      # Mantener conexión activa
+      - send: '{"type":"ping"}'
+      - think: 5

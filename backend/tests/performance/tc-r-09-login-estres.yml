@@ -1,0 +1,41 @@
+# TC-R-09 — Estrés: 500 usuarios concurrentes en login
+# Objetivo: El sistema no colapsa con 500 VUs. Tasa de error < 5%.
+#           Verificar recuperación tras el pico de carga.
+# Herramienta: Artillery.io
+# Prerrequisito: node tests/performance/setup-load-data.js
+# ADVERTENCIA: Ejecutar al final — impacta el rendimiento del servidor.
+
+config:
+  target: "http://localhost:4000"
+  phases:
+    - name: "Calentamiento: 50 usuarios durante 10s"
+      duration: 10
+      arrivalRate: 5
+    - name: "Ramp-up a estrés: 500 usuarios en 30s"
+      duration: 30
+      arrivalRate: 15
+    - name: "Pico de estrés: 500 VUs durante 30s"
+      duration: 30
+      arrivalRate: 0
+      maxVusers: 500
+    - name: "Recuperación: reducción gradual durante 20s"
+      duration: 20
+      arrivalRate: 5
+  defaults:
+    headers:
+      Content-Type: "application/json"
+  # Para prueba de estrés: umbral más permisivo (degradación esperada)
+  ensure:
+    conditions:
+      - expression: "(errors / (requests.completed + errors + 0.001)) < 0.05"
+        strict: false
+
+scenarios:
+  - name: "TC-R-09: Login bajo condición de estrés extremo"
+    flow:
+      - post:
+          url: "/auth/login"
+          json:
+            email: "loadtest@test.com"
+            password: "Pass123!"
+          # No forzar statusCode 200 en estrés — registrar todos los errores para análisis

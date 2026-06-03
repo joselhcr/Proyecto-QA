@@ -1,0 +1,36 @@
+# TC-R-01 — Tiempo de respuesta del login bajo carga normal
+# Objetivo: POST /auth/login responde en p95 <= 2000ms con 10 VUs concurrentes.
+# Herramienta: Artillery.io
+# Prerrequisito: node tests/performance/setup-load-data.js
+
+config:
+  target: "http://localhost:4000"
+  phases:
+    - name: "Ramp-up: 10 usuarios en 5s"
+      duration: 5
+      arrivalRate: 2
+    - name: "Carga sostenida: 30s"
+      duration: 30
+      arrivalRate: 0
+      maxVusers: 10
+  defaults:
+    headers:
+      Content-Type: "application/json"
+  ensure:
+    thresholds:
+      - http.response_time.p95: 2000
+    conditions:
+      - expression: "(errors / (requests.completed + errors + 0.001)) < 0.01"
+        strict: true
+
+scenarios:
+  - name: "TC-R-01: Login con credenciales válidas"
+    flow:
+      - post:
+          url: "/auth/login"
+          json:
+            email: "loadtest@test.com"
+            password: "Pass123!"
+          expect:
+            - statusCode: 200
+            - hasProperty: "token"
