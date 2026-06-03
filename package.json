@@ -53,7 +53,7 @@
   "scripts": {
     "start": "cd frontend && npm start",
     "build": "cd frontend && npm run build",
-    "test": "cd frontend && npm start",
+    "test": "react-scripts test",
     "eject": "cd frontend && npm run eject",
     "server": "cd backend && npm start",
     "backend": "cd backend && npm start",

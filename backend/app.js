@@ -53,7 +53,9 @@ const createApp = () => {
     next();
   });
   app.use(bodyParser.json());
-  app.use(createLoggingMiddleware());
+  if (process.env.NODE_ENV !== "test") {
+    app.use(createLoggingMiddleware());
+  }
   app.use(express.static(path.join(__dirname, "public")));
 
   app.get("/swagger.json", (req, res) => {
