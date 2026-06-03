@@ -1,0 +1,90 @@
+{
+  "aggregate": {
+    "counters": {
+      "vusers.created_by_name.TC-R-06: Registro de usuario único con email aleatorio": 200,
+      "vusers.created": 200,
+      "http.requests": 200,
+      "plugins.metrics-by-endpoint./auth/register.errors.ERR_SOCKET_TIMEOUT": 169,
+      "errors.ERR_SOCKET_TIMEOUT": 169,
+      "vusers.failed": 200,
+      "plugins.metrics-by-endpoint./auth/register.errors.ECONNREFUSED": 31,
+      "errors.ECONNREFUSED": 31
+    },
+    "rates": {
+      "http.request_rate": 10
+    },
+    "firstCounterAt": 1780511803301,
+    "lastCounterAt": 1780511827768,
+    "firstMetricAt": 1780511803301,
+    "lastMetricAt": 1780511827768,
+    "period": 1780511820000,
+    "summaries": {},
+    "histograms": {}
+  },
+  "intermediate": [
+    {
+      "counters": {
+        "vusers.created_by_name.TC-R-06: Registro de usuario único con email aleatorio": 70,
+        "vusers.created": 70,
+        "http.requests": 70
+      },
+      "rates": {
+        "http.request_rate": 10
+      },
+      "http.request_rate": null,
+      "firstCounterAt": 1780511803301,
+      "lastCounterAt": 1780511809809,
+      "firstMetricAt": 1780511803301,
+      "lastMetricAt": 1780511809809,
+      "period": "1780511800000",
+      "summaries": {},
+      "histograms": {}
+    },
+    {
+      "counters": {
+        "vusers.created_by_name.TC-R-06: Registro de usuario único con email aleatorio": 100,
+        "vusers.created": 100,
+        "http.requests": 100,
+        "plugins.metrics-by-endpoint./auth/register.errors.ERR_SOCKET_TIMEOUT": 90,
+        "errors.ERR_SOCKET_TIMEOUT": 90,
+        "vusers.failed": 91,
+        "plugins.metrics-by-endpoint./auth/register.errors.ECONNREFUSED": 1,
+        "errors.ECONNREFUSED": 1
+      },
+      "rates": {
+        "http.request_rate": 10
+      },
+      "http.request_rate": null,
+      "firstCounterAt": 1780511810299,
+      "lastCounterAt": 1780511819810,
+      "firstMetricAt": 1780511810299,
+      "lastMetricAt": 1780511819810,
+      "period": "1780511810000",
+      "summaries": {},
+      "histograms": {}
+    },
+    {
+      "counters": {
+        "vusers.created_by_name.TC-R-06: Registro de usuario único con email aleatorio": 30,
+        "vusers.created": 30,
+        "http.requests": 30,
+        "plugins.metrics-by-endpoint./auth/register.errors.ECONNREFUSED": 30,
+        "errors.ECONNREFUSED": 30,
+        "vusers.failed": 109,
+        "plugins.metrics-by-endpoint./auth/register.errors.ERR_SOCKET_TIMEOUT": 79,
+        "errors.ERR_SOCKET_TIMEOUT": 79
+      },
+      "rates": {
+        "http.request_rate": 17
+      },
+      "http.request_rate": null,
+      "firstCounterAt": 1780511820299,
+      "lastCounterAt": 1780511827768,
+      "firstMetricAt": 1780511820299,
+      "lastMetricAt": 1780511827768,
+      "period": "1780511820000",
+      "summaries": {},
+      "histograms": {}
+    }
+  ]
+}
