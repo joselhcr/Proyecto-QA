@@ -1,0 +1,35 @@
+# TC-R-02 — Tiempo de respuesta de jugada WebSocket bajo carga (20 concurrentes)
+# Objetivo: El servidor procesa mensajes {type:"move"} de 20 VUs en p95 <= 2000ms.
+# Herramienta: Artillery.io (engine WebSocket)
+# Nota: El test plan menciona POST /realtime/move, pero el código usa WebSocket
+#       nativo en /ws (websocket.js). Este YAML usa el protocolo real del servidor.
+
+config:
+  target: "ws://localhost:4000"
+  phases:
+    - name: "20 jugadores concurrentes durante 30s"
+      duration: 30
+      arrivalRate: 4
+      maxVusers: 20
+  ws:
+    path: "/ws"
+
+scenarios:
+  - name: "TC-R-02: Jugada en partida activa via WebSocket"
+    engine: "ws"
+    flow:
+      # Conectar — el servidor responde con {type:"connected", clientId}
+      - send: '{"type":"join","username":"player-{{ $randomInt(1,9999) }}"}'
+      - think: 1
+
+      # Simular secuencia de 3 jugadas con delay realista entre ellas
+      - send: '{"type":"move","index":{{ $randomInt(0,8) }}}'
+      - think: 1
+      - send: '{"type":"move","index":{{ $randomInt(0,8) }}}'
+      - think: 1
+      - send: '{"type":"move","index":{{ $randomInt(0,8) }}}'
+      - think: 1
+
+      # Heartbeat para mantener conexión activa
+      - send: '{"type":"ping"}'
+      - think: 3
