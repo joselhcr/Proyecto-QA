@@ -663,7 +663,9 @@ router.post("/match/finish", authenticate, async (req, res) => {
       "human",
     );
 
-    console.log("playerEntry.elo", newPlayerElo);
+    if (process.env.NODE_ENV !== "test") {
+      console.log("playerEntry.elo", newPlayerElo);
+    }
 
     const newOpponentElo = calculateElo(
       opponentEntry.elo,
@@ -672,7 +674,9 @@ router.post("/match/finish", authenticate, async (req, res) => {
       "human",
     );
 
-    console.log("opponentEntry.elo", newOpponentElo);
+    if (process.env.NODE_ENV !== "test") {
+      console.log("opponentEntry.elo", newOpponentElo);
+    }
 
     // Update LeaderboardEntry for both players
     // Increment fields dynamically
