@@ -1,0 +1,55 @@
+# TC-R-04 — Carga en endpoint leaderboard (100 peticiones concurrentes)
+# Objetivo: GET /leaderboard responde en p95 <= 2000ms con 100 VUs autenticados.
+# Herramienta: Artillery.io
+# Prerrequisito: node tests/performance/setup-load-data.js
+
+config:
+  target: "http://localhost:4000"
+  phases:
+    - name: "Ramp-up: 100 usuarios en 10s"
+      duration: 10
+      arrivalRate: 10
+    - name: "Carga sostenida: 30s"
+      duration: 30
+      arrivalRate: 0
+      maxVusers: 100
+  defaults:
+    headers:
+      Content-Type: "application/json"
+  ensure:
+    thresholds:
+      - http.response_time.p95: 2000
+    conditions:
+      - expression: "(errors / (requests.completed + errors + 0.001)) < 0.01"
+        strict: true
+
+scenarios:
+  - name: "TC-R-04: Autenticar y consultar leaderboard"
+    flow:
+      # Paso 1: Login para obtener JWT válido
+      - post:
+          url: "/auth/login"
+          json:
+            email: "loadtest@test.com"
+            password: "Pass123!"
+          capture:
+            - json: "$.token"
+              as: "jwtToken"
+          expect:
+            - statusCode: 200
+
+      # Paso 2: Primera consulta al leaderboard
+      - get:
+          url: "/leaderboard"
+          headers:
+            Authorization: "Bearer {{ jwtToken }}"
+          expect:
+            - statusCode: 200
+
+      # Paso 3: Segunda consulta (simula refresh de la lista)
+      - get:
+          url: "/leaderboard"
+          headers:
+            Authorization: "Bearer {{ jwtToken }}"
+          expect:
+            - statusCode: 200

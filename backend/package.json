@@ -6,8 +6,11 @@
   "scripts": {
     "start": "nodemon server.js",
     "dev": "nodemon server.js",
-    "test": "jest --runInBand",
-    "test:integration": "jest --runInBand tests/integration"
+    "test": "jest --runInBand --forceExit --detectOpenHandles",
+    "test:integration": "jest --runInBand tests/integration --forceExit --detectOpenHandles",
+    "test:security": "jest --testPathPattern=tests/security --forceExit --detectOpenHandles",
+    "test:perf": "jest --testPathPattern=tests/performance --forceExit",
+    "test:all": "jest --runInBand --forceExit --detectOpenHandles"
   },
   "dependencies": {
     "body-parser": "^1.20.3",
@@ -21,7 +24,10 @@
     "ws": "^8.18.0"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/supertest": "^6.0.2",
     "@types/ws": "^8.5.13",
+    "docx": "^9.7.1",
     "jest": "^30.4.2",
     "mongodb-memory-server": "^11.2.0",
     "nodemon": "^2.0.22",
@@ -33,17 +39,8 @@
     "authentication",
     "leaderboard",
     "express",
-    "game",
-    "RESTful API"
+    "game"
   ],
   "author": "Son Nguyen",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hoangsonww/Tic-Tac-Toe-Fullstack-Game.git"
-  },
-  "bugs": {
-    "url": "https://github.com/hoangsonww/Tic-Tac-Toe-Fullstack-Game/issues",
-    "email": "hoangson091104@gmail.com"
-  }
+  "license": "MIT"
 }

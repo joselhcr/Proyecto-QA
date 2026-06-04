@@ -1,0 +1,89 @@
+{
+  "aggregate": {
+    "counters": {
+      "vusers.created_by_name.TC-R-02: Jugada en partida activa via WebSocket": 120,
+      "vusers.created": 120,
+      "errors.socket hang up": 120,
+      "errors.ECONNRESET": 120,
+      "vusers.failed": 120
+    },
+    "rates": {},
+    "firstCounterAt": 1780511744556,
+    "lastCounterAt": 1780511773718,
+    "firstMetricAt": 1780511744556,
+    "lastMetricAt": 1780511773718,
+    "period": 1780511770000,
+    "summaries": {},
+    "histograms": {}
+  },
+  "intermediate": [
+    {
+      "counters": {
+        "vusers.created_by_name.TC-R-02: Jugada en partida activa via WebSocket": 24,
+        "vusers.created": 24,
+        "errors.socket hang up": 24,
+        "errors.ECONNRESET": 24,
+        "vusers.failed": 24
+      },
+      "rates": {},
+      "firstCounterAt": 1780511744556,
+      "lastCounterAt": 1780511749718,
+      "firstMetricAt": 1780511744556,
+      "lastMetricAt": 1780511749718,
+      "period": "1780511740000",
+      "summaries": {},
+      "histograms": {}
+    },
+    {
+      "counters": {
+        "vusers.created_by_name.TC-R-02: Jugada en partida activa via WebSocket": 40,
+        "vusers.created": 40,
+        "errors.socket hang up": 40,
+        "errors.ECONNRESET": 40,
+        "vusers.failed": 40
+      },
+      "rates": {},
+      "firstCounterAt": 1780511750555,
+      "lastCounterAt": 1780511759718,
+      "firstMetricAt": 1780511750555,
+      "lastMetricAt": 1780511759718,
+      "period": "1780511750000",
+      "summaries": {},
+      "histograms": {}
+    },
+    {
+      "counters": {
+        "vusers.created_by_name.TC-R-02: Jugada en partida activa via WebSocket": 40,
+        "vusers.created": 40,
+        "errors.socket hang up": 40,
+        "errors.ECONNRESET": 40,
+        "vusers.failed": 40
+      },
+      "rates": {},
+      "firstCounterAt": 1780511760555,
+      "lastCounterAt": 1780511769717,
+      "firstMetricAt": 1780511760555,
+      "lastMetricAt": 1780511769717,
+      "period": "1780511760000",
+      "summaries": {},
+      "histograms": {}
+    },
+    {
+      "counters": {
+        "vusers.created_by_name.TC-R-02: Jugada en partida activa via WebSocket": 16,
+        "vusers.created": 16,
+        "errors.socket hang up": 16,
+        "errors.ECONNRESET": 16,
+        "vusers.failed": 16
+      },
+      "rates": {},
+      "firstCounterAt": 1780511770555,
+      "lastCounterAt": 1780511773718,
+      "firstMetricAt": 1780511770555,
+      "lastMetricAt": 1780511773718,
+      "period": "1780511770000",
+      "summaries": {},
+      "histograms": {}
+    }
+  ]
+}
