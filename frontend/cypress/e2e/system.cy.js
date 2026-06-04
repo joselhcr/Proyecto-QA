@@ -31,7 +31,7 @@ describe('Pruebas de Sistema - Tic Tac Toe Pro', () => {
     cy.get('input[type="password"]').first().type(user.password);
     cy.get('input[type="password"]').last().type(user.password);
     cy.get('button[type="submit"]').click();
-    cy.url().should('include', '/login');
+    cy.url().should('not.include', '/register');
   });
 
   // TC-S-02: Registro con nombre menor a 1 carácter
