@@ -26,7 +26,7 @@ describe("Pruebas Unitarias Tic Tac Toe", () => {
     
     // Casos de pruebas unitarias:
     
-    it("calculateWinner detecta victoria en fila superior - tablero 3x3", () => {
+    it("TC-U-01 calculateWinner detecta victoria en fila superior - tablero 3x3", () => {
         const board = [
             ['X', 'X', 'X'],
             ['', '', ''],
@@ -35,7 +35,7 @@ describe("Pruebas Unitarias Tic Tac Toe", () => {
         expect(calculateWinner(board)).toBe('X');
     });
 
-    it("calculateWinner detecta victoria en columna izquierda — tablero 3x3", () => {
+    it("TC-U-02 calculateWinner detecta victoria en columna izquierda — tablero 3x3", () => {
         const board = [
             ['O', '', ''],
             ['O', '', ''],
@@ -44,7 +44,7 @@ describe("Pruebas Unitarias Tic Tac Toe", () => {
         expect(calculateWinner(board)).toBe('O');
     });
 
-    it("calculateWinner detecta victoria en diagonal principal — tablero 3x3", () => {
+    it("TC-U-03 calculateWinner detecta victoria en diagonal principal — tablero 3x3", () => {
         const board = [
             ['X', '', ''],
             ['', 'X', ''],
@@ -53,7 +53,7 @@ describe("Pruebas Unitarias Tic Tac Toe", () => {
         expect(calculateWinner(board)).toBe('X');
     });
 
-    it("isBoardFull detecta empate en tablero 3x3 lleno", () => {
+    it("TC-U-04 isBoardFull detecta empate en tablero 3x3 lleno", () => {
         const board = [
             ['X', 'O', 'X'],
             ['X', 'O', 'O'],
@@ -62,7 +62,7 @@ describe("Pruebas Unitarias Tic Tac Toe", () => {
         expect(isBoardFull(board)).toBe(true);
     });
 
-    it("calculateWinner retorna null en tablero vacío", () => {
+    it("TC-U-05 calculateWinner retorna null en tablero vacío", () => {
         const board = [
             ['', '', ''],
             ['', '', ''],
@@ -71,7 +71,7 @@ describe("Pruebas Unitarias Tic Tac Toe", () => {
         expect(calculateWinner(board)).toBeNull();
     });
 
-    it("isBoardFull retorna false en tablero con celdas libres", () => {
+    it("TC-U-06 isBoardFull retorna false en tablero con celdas libres", () => {
         const board = [
             ['X', 'O', ''],
             ['X', '', ''],
@@ -80,7 +80,7 @@ describe("Pruebas Unitarias Tic Tac Toe", () => {
         expect(isBoardFull(board)).toBe(false);
     });
 
-    it("calculateWinner detecta victoria en diagonal, tablero 3x3", () => {
+    it("TC-U-07 calculateWinner detecta victoria en diagonal, tablero 3x3", () => {
         const board = [
             ['', '', 'O'],
             ['', 'O', ''],
@@ -89,7 +89,7 @@ describe("Pruebas Unitarias Tic Tac Toe", () => {
         expect(calculateWinner(board)).toBe('O');
     });
 
-    it("getAIMove no selecciona celda ocupada", () => {
+    it("TC-U-08 getAIMove no selecciona celda ocupada", () => {
         const board = [
             ['X', 'O', 'X'],
             ['O', '', 'X'],
@@ -103,7 +103,7 @@ describe("Pruebas Unitarias Tic Tac Toe", () => {
         expect(validMoves).toContainEqual(move);
     });
 
-    it("findBestMove bloquea jugada ganadora del oponente", () => {
+    it("TC-U-09 findBestMove bloquea jugada ganadora del oponente", () => {
         // En ai.ts, findBestMove es interno pero getAIMove('impossible') lo llama directamente.
         const board = [
             ['X', 'X', ''],
@@ -114,7 +114,7 @@ describe("Pruebas Unitarias Tic Tac Toe", () => {
         expect(move).toEqual({ row: 0, col: 2 });
     });
 
-    it("calculateWinner detecta victoria", () => {
+    it("TC-U-10 calculateWinner detecta victoria", () => {
         const board = [
             ['X', 'X', 'X'],
             ['', '', ''],
@@ -123,7 +123,7 @@ describe("Pruebas Unitarias Tic Tac Toe", () => {
         expect(calculateWinner(board)).toEqual(calculateWinnerAI(board));
     });
 
-    it("getAIMove en dificultad hard, elige jugada ganadora disponible", () => {
+    it("TC-U-11 getAIMove en dificultad hard, elige jugada ganadora disponible", () => {
         const board = [
             ['O', 'O', ''],
             ['X', 'X', ''],
@@ -133,17 +133,17 @@ describe("Pruebas Unitarias Tic Tac Toe", () => {
         expect(move).toEqual({ row: 0, col: 2 });
     });
 
-    it("winnerFromBoard detecta victoria en servidor", () => {
+    it("TC-U-12 winnerFromBoard detecta victoria en servidor", () => {
         const board = ['X', 'X', 'X', null, null, null, null, null, null];
         expect(winnerFromBoard(board)).toBe('X');
     });
 
-    it("winnerFromBoard retorna 'draw' cuando tablero está lleno sin ganador", () => {
+    it("TC-U-13 winnerFromBoard retorna 'draw' cuando tablero está lleno sin ganador", () => {
         const board = ['X', 'O', 'X', 'X', 'O', 'O', 'O', 'X', 'X'];
         expect(winnerFromBoard(board)).toBe('draw');
     });
 
-    it("buildBoardFromMoves reconstruye tablero correctamente", () => {
+    it("TC-U-14 buildBoardFromMoves reconstruye tablero correctamente", () => {
         const match = {
             moves: [
                 { player: 'X', index: 0 },

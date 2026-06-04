@@ -8,8 +8,8 @@
     "dev": "nodemon server.js",
     "test": "jest --runInBand --forceExit --detectOpenHandles",
     "test:integration": "jest --runInBand tests/integration --forceExit --detectOpenHandles",
-    "test:security": "jest --testPathPattern=tests/security --forceExit --detectOpenHandles",
-    "test:perf": "jest --testPathPattern=tests/performance --forceExit",
+    "test:security": "jest --testPathPatterns=tests/security --forceExit --detectOpenHandles",
+    "test:perf": "jest --testPathPatterns=tests/performance --forceExit",
     "test:all": "jest --runInBand --forceExit --detectOpenHandles"
   },
   "dependencies": {
